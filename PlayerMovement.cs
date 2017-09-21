@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     Rigidbody2D rig_;
-    MicCode2 micInput;
+    MicrophoneInput micInput;
 
 	// Use this for initialization
 	void Start () {
         rig_ = GetComponent<Rigidbody2D>();
-        micInput = FindObjectOfType<MicCode2>();
+        micInput = FindObjectOfType<MicrophoneInput>();
 	}
 	
 	// Update is called once per frame
