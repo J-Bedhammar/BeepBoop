@@ -5,31 +5,24 @@ using UnityEngine;
 public class MicrophoneInput : MonoBehaviour
 {
 
-    //int sample_size = 256;
-    int audioSampleRate = 44100;
-    float minThreshold = 0;
+	int audioSampleRate = 24000; 
     string micInput;
-
-    //AudioClip audio_;
-    public FFTWindow fftWindow;
+	public FFTWindow fftWindow = FFTWindow.BlackmanHarris; //This window is more precise (something I read somewhere)
     private int samples = 8192;
     private AudioSource audioSource;
 
     // Use this for initialization
     void Start()
     {
-
         audioSource = GetComponent<AudioSource>();
 
         if (micInput == null)
             micInput = Microphone.devices[0];
-
-        Update();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+		
         audioSource.Stop();
         audioSource.clip = Microphone.Start(micInput, true, 5, audioSampleRate);
         audioSource.loop = true;
@@ -39,30 +32,25 @@ public class MicrophoneInput : MonoBehaviour
         if (Microphone.IsRecording(micInput))
         {
             while (!(Microphone.GetPosition(micInput) > 0))
-            {
                 audioSource.Play();
-            }
         }
-        else {
+        else 
             Debug.Log(micInput + " doesn't work");
-        }
-
     }
 
     public float GetFrequency() {
+		
         float frequency = 0.0f;
-        float[] data = new float[samples];
+        float[] data = new float[samples]; //array to put spectrum information in
         audioSource.GetSpectrumData(data, 0, fftWindow);
-        float s = 0.0f;
+        float s = 0.0f; //initiate s to a low value
         int i = 0;
 
         for (int j = 0; j < samples; j++) {
-            if (data[j] > minThreshold) {
                 if (s < data[j]) {
                     s = data[j];
                     i = j;
                 }
-            }
         }
 
         frequency = i * audioSampleRate / samples;
