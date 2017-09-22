@@ -17,14 +17,11 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
         print(micInput.GetFrequency());
         
-        if (micInput.GetFrequency() >= 300 && micInput.GetFrequency() < 500)
-		    rig_.MovePosition(transform.position + new Vector3(micInput.GetFrequency() /-1000, 0, 0));
-        else if (micInput.GetFrequency() >= 500 && micInput.GetFrequency() < 850)
-            rig_.MovePosition(transform.position + new Vector3(micInput.GetFrequency() /1500, 0, 0));
-        else if (micInput.GetFrequency() >= 850)
-            rig_.MovePosition(transform.position + new Vector3(0, micInput.GetFrequency() /2800, 0));
-        else
-            rig_.MovePosition(transform.position + new Vector3(0, 0, 0));
-
+        if (micInput.GetFrequency() >= 100 && micInput.GetFrequency() < 200)
+			rig_.MovePosition(transform.position + new Vector3(-1, 0, 0)); //micInput.GetFrequency() /-1000
+        else if (micInput.GetFrequency() >= 200 && micInput.GetFrequency() < 300)
+			rig_.MovePosition(transform.position + new Vector3(1, 0, 0)); //micInput.GetFrequency() /1500
+        else if (micInput.GetFrequency() >= 300)
+			rig_.MovePosition(transform.position + new Vector3(0, 1, 0)); //micInput.GetFrequency() /280
     }
 }
