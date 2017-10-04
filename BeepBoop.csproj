@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Assets\Script\CameraController.cs" />
     <Compile Include="Assets\Script\MicrophoneInput.cs" />
+    <Compile Include="Assets\Script\MicrophoneInput2.cs" />
     <Compile Include="Assets\Script\PlayerMovement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
